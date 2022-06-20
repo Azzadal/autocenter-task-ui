@@ -18,9 +18,9 @@ export const MainRouter: React.FC = () => {
       <hr />
 
       <Routes>
-        <Route path="/" element={<About2 />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/dashboard" />
+        <Route path="/dashboard" element={<About2 />} />
       </Routes>
     </div>
   );
@@ -36,4 +36,8 @@ const About2: React.FC = () => {
       <Link to="/about">About!!!!!!!</Link>
     </>
   );
+};
+
+const Home: React.FC = () => {
+  return <div>Home</div>;
 };

@@ -1,11 +1,59 @@
-.left-side-bar {
-  width: 20%;
-  height: auto;
-  border: 1px solid green;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.top-bar {
-  width: 100%;
+html,
+body {
+  height: 100%;
+}
+
+header {
   height: 60px;
-  border: 1px solid green;
+  background-color: rgb(50, 77, 68);
+  text-align: center;
+  font-size: large;
+  display: flex;
+}
+
+header a {
+  color: #ffde3a;
+  padding: 20px;
+  line-height: 3rem;
+}
+
+.ant-select-selector {
+  background-color: #3e5a51 !important;
+  color: #ffde3a !important;
+}
+
+header .client_card {
+  width: 200px;
+  height: auto;
+  white-space: nowrap;
+  line-height: 3rem;
+  color: #c5a841;
+}
+
+header .header_nav {
+  margin-left: calc(50% - 200px);
+  line-height: 3rem;
+}
+
+.header_select {
+  padding: 3px !important;
+}
+
+.container {
+  min-height: calc(100vh - 120px);
+}
+
+footer {
+  border: 1px solid #9592298c;
+  height: 58px;
+  background-color: rgb(50, 77, 68);
+  text-align: center;
+  font-size: large;
+  color: #ffde3a;
+  line-height: 3rem;
 }

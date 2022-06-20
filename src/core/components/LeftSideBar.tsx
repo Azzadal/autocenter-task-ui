@@ -6,35 +6,28 @@ const history = createBrowserHistory();
 
 export const LeftBar: React.FC = () => {
   return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">About2</Link>
-          </li>
-        </ul>
+    <div className="left-side-bar">
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/car">Автомобили</Link>
+        </li>
+        <li>
+          <Link to="/dashboard">About2</Link>
+        </li>
+      </ul>
 
-        <hr />
+      <hr />
 
-        <Routes>
-          <Route path="/">
-            <About />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/dashboard">
-            <About2 />
-          </Route>
-        </Routes>
-      </div>
-    </Router>
+      {/* <Routes>
+        <Route path="/" />
+        <Route path="/car" element={<Car />} />
+        <Route path="/dashboard" element={<About2 />} />
+      </Routes> */}
+    </div>
+
     // <div className="left-side-bar">
     //   <ul>
     //     <li>Автомобили</li>
@@ -43,10 +36,6 @@ export const LeftBar: React.FC = () => {
   );
 };
 
-const About: React.FC = () => {
-  return <div>About</div>;
-};
-
-const About2: React.FC = () => {
+export const About2: React.FC = () => {
   return <div>About2</div>;
 };
