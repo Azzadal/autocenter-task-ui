@@ -11,21 +11,27 @@ export const Layout: React.FC = () => {
         <div className="client_card">Карта клиента</div>
         <div className="header_nav">
           <Select className="header_select" defaultValue="Сервис">
-            <Select.Option value="1">
+            <Select.Option key={4} value="4">
               <Link to="trade-in">Trade-In</Link>
             </Select.Option>
-            <Select.Option value="1">
+            <Select.Option key={5} value="5">
               <Link to="service">Обслуживание</Link>
             </Select.Option>
-            <Select.Option value="1">Тест-драйв</Select.Option>
+            <Select.Option key={6} value="6">
+              Тест-драйв
+            </Select.Option>
           </Select>
 
           <Select className="header_select" defaultValue="Автомобили">
-            <Select.Option value="1">
-              <Link to="car-exist">Наличие</Link>
+            <Select.Option key={1} value="1">
+              <Link to="car">Наличие</Link>
             </Select.Option>
-            <Select.Option value="1">2222222222</Select.Option>
-            <Select.Option value="1">ssdfsdf</Select.Option>
+            <Select.Option key={2} value="2">
+              2222222222
+            </Select.Option>
+            <Select.Option key={3} value="3">
+              ssdfsdf
+            </Select.Option>
           </Select>
         </div>
       </header>

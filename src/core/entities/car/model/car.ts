@@ -15,5 +15,5 @@ type Model = { name: string };
 type Mark = { name: string };
 
 type ICarMutate = ICarInfo;
-export type ICarResponse = ICarMutate;
+export type ICarResponse = ICarMutate & { id: number };
 export type ICarRequest = ICarMutate;
