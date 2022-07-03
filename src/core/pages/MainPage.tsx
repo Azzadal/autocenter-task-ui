@@ -1,9 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
+import { AuthResponse } from '../auth/auth-servise';
 import { Layout } from '../components/Layout';
-import { About2, LeftBar } from '../components/LeftSideBar';
-import { TopBar } from '../components/TopBar';
 import { CarPage } from './CarPage';
+import { CarSheringPage } from './CarSheringPage';
 import { HomePage } from './HomePage';
+import { ServicePage } from './ServicePage';
+import { TestDrivePage } from './TestDrivePage';
+import { TradeInPage } from './TradeInPage';
 
 export const MainPage: React.FC = () => {
   return (
@@ -12,6 +15,10 @@ export const MainPage: React.FC = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="car" element={<CarPage />} />
+          <Route path="trade-in" element={<TradeInPage />} />
+          <Route path="test-drive" element={<TestDrivePage />} />
+          <Route path="service" element={<ServicePage />} />
+          <Route path="car-shering" element={<CarSheringPage />} />
         </Route>
       </Routes>
     </>

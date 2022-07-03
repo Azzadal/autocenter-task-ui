@@ -1,9 +1,17 @@
-import React from 'react';
-import Main from './Main';
-import { MainRouter } from './routes/MainRouter';
+import React, { useState } from 'react';
+import { AuthResponse } from './core/auth/auth-servise';
+import { MainPage } from './core/pages/MainPage';
+
+export const AppContext = React.createContext({ token: 'token' });
 
 function App() {
-  return <Main />;
+  const [token, setToken] = useState<AuthResponse>({ token: 'token' });
+
+  return (
+    <AppContext.Provider value={token}>
+      <MainPage />
+    </AppContext.Provider>
+  );
 }
 
 export default App;

@@ -8,38 +8,23 @@ export const Layout: React.FC = () => {
   return (
     <>
       <header>
-        <div className="client_card">Карта клиента</div>
-        <div className="header_nav">
-          <Select className="header_select" defaultValue="Сервис">
-            <Select.Option key={4} value="4">
-              <Link to="trade-in">Trade-In</Link>
-            </Select.Option>
-            <Select.Option key={5} value="5">
-              <Link to="service">Обслуживание</Link>
-            </Select.Option>
-            <Select.Option key={6} value="6">
-              Тест-драйв
-            </Select.Option>
-          </Select>
-
-          <Select className="header_select" defaultValue="Автомобили">
-            <Select.Option key={1} value="1">
-              <Link to="car">Наличие</Link>
-            </Select.Option>
-            <Select.Option key={2} value="2">
-              2222222222
-            </Select.Option>
-            <Select.Option key={3} value="3">
-              ssdfsdf
-            </Select.Option>
-          </Select>
+        <div className="client_card">
+          <Link to="/">Lux auto logo</Link>
         </div>
+        <div className="header_nav">
+          <Link to="car">Автомобили</Link>
+          <Link to="trade-in">Trade-In</Link>
+          <Link to="test-drive">Test-drive</Link>
+          <Link to="service">Обслуживание</Link>
+          <Link to="car-shering">Car-sharing</Link>
+        </div>
+        <div className="user-info">user info</div>
       </header>
       <main className="container">
         <Outlet />
       </main>
 
-      <footer>2022</footer>
+      <footer>Авто-центр Lux auto 2022 | адрес телефон | соц сети</footer>
     </>
   );
 };

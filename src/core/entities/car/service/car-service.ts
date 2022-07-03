@@ -1,13 +1,15 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 import { ICarRequest, ICarResponse } from '../model/car';
 
 class CarService {
-  public async getAll(): Promise<ICarResponse> {
-    return await axios.get(`http://localhost:8080/core/car`);
+  public async getAll(options?: AxiosRequestConfig): Promise<ICarResponse[]> {
+    const { data } = await axios.get(`http://localhost:8080/core/car`, options);
+    return data;
   }
 
   public async getById(id: number): Promise<ICarResponse> {
-    return await axios.get(`http://localhost:8080/core/car/${id}`);
+    const { data } = await axios.get(`http://localhost:8080/core/car/${id}`);
+    return data;
   }
 
   public async create(request: ICarRequest): Promise<ICarResponse> {
