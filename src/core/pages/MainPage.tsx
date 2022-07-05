@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import { AuthResponse } from '../auth/auth-servise';
 import { Layout } from '../components/Layout';
 import { CarPage } from './CarPage';
 import { CarSheringPage } from './CarSheringPage';

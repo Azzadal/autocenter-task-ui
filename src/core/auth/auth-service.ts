@@ -4,7 +4,7 @@ import { IAuthInfo } from './types';
 export type AuthResponse = { token: string };
 type RegisterResponse = { status: string };
 
-class AuthServise {
+class AuthService {
   async register(request: IAuthInfo): Promise<RegisterResponse> {
     const { data } = await axios.post('http://localhost:8080/register', request);
     return data;
@@ -15,9 +15,10 @@ class AuthServise {
       .post('http://localhost:8080/auth', request)
       .then((response: AxiosResponse<AuthResponse>) => {
         localStorage.setItem('accessToken', response.data.token);
+        localStorage.setItem('userInfo', request.login);
         return response.data;
       });
   }
 }
 
-export const authservise = new AuthServise();
+export const authservice = new AuthService();

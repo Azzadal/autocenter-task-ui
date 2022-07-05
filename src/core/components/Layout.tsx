@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import '../../styles/style.css';
 import 'antd/dist/antd.css';
+import { UserInfoTopBar } from '../entities/user/components/user-info';
 
 export const Layout: React.FC = () => {
   return (
@@ -18,7 +19,7 @@ export const Layout: React.FC = () => {
           <Link to="service">Обслуживание</Link>
           <Link to="car-shering">Car-sharing</Link>
         </div>
-        <div className="user-info">user info</div>
+        <UserInfoTopBar />
       </header>
       <main className="container">
         <Outlet />

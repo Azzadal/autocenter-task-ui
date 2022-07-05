@@ -1,26 +1,39 @@
-import { Button, Checkbox, Form, Input, Radio } from 'antd';
+import { Button, Checkbox, Form, Input, Radio, Select } from 'antd';
 import { useState } from 'react';
+import { ICarResponse } from '../../entities/car/model/car';
 
-export type FormTradeInType = {
+interface ICarSharingFormProps {
+  cars: ICarResponse[];
+  onSubmit: (data: FormCarSharingType) => void;
+}
+
+export type FormCarSharingType = {
+  car_id?: number;
   connection?: string;
   'connection-type'?: string;
 };
 
-interface ITradeInFormProps {
-  onSubmit: (data: FormTradeInType) => void;
-}
-
-export const TradeInForm: React.FC<ITradeInFormProps> = ({ onSubmit }) => {
+export const CarSharingForm: React.FC<ICarSharingFormProps> = ({ cars, onSubmit }) => {
   const [accept, setAccept] = useState<boolean>(true);
-
-  const handleFinish = (data: FormTradeInType) => {
+  const handleFinish = (data: FormCarSharingType) => {
     onSubmit(data);
   };
 
   return (
     <>
-      <span style={{ fontSize: '20px' }}>Оформить заявку на Trade-In</span>
-      <Form<FormTradeInType> onFinish={handleFinish}>
+      <span style={{ fontSize: '20px' }}>Оформить заявку на Car-Sharing</span>
+      <Form<FormCarSharingType> onFinish={handleFinish}>
+        <Form.Item name="car_id">
+          <Select>
+            {cars.map((car, index) => {
+              return (
+                <Select.Option key={index} value={car.id}>
+                  {car.model.name}
+                </Select.Option>
+              );
+            })}
+          </Select>
+        </Form.Item>
         <Form.Item name="connection-type" label="Выберите предпочтительный способ связи">
           <Radio.Group defaultValue="tel">
             <Radio value={'tel'}>По телефону</Radio>
@@ -44,7 +57,7 @@ export const TradeInForm: React.FC<ITradeInFormProps> = ({ onSubmit }) => {
           Согласие на обработку данных
         </Checkbox>
         <Button disabled={accept} htmlType="submit">
-          Отправить заявку
+          Submit
         </Button>
       </Form>
     </>

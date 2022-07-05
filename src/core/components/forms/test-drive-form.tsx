@@ -8,14 +8,13 @@ interface ITestDriveFormProps {
 }
 
 export type FormTestDriveType = {
-  car?: string;
+  car_id?: number;
   connection?: string;
   'connection-type'?: string;
 };
 
 export const TestDriveForm: React.FC<ITestDriveFormProps> = ({ cars, onSubmit }) => {
   const [accept, setAccept] = useState<boolean>(true);
-
   const handleFinish = (data: FormTestDriveType) => {
     onSubmit(data);
   };
@@ -23,12 +22,12 @@ export const TestDriveForm: React.FC<ITestDriveFormProps> = ({ cars, onSubmit })
   return (
     <>
       <span style={{ fontSize: '20px' }}>Оформить заявку на Test-drive</span>
-      <Form onFinish={handleFinish}>
-        <Form.Item name="car">
+      <Form<FormTestDriveType> onFinish={handleFinish}>
+        <Form.Item name="car_id">
           <Select>
             {cars.map((car, index) => {
               return (
-                <Select.Option key={index} value={car.model.name}>
+                <Select.Option key={index} value={car.id}>
                   {car.model.name}
                 </Select.Option>
               );
@@ -46,7 +45,7 @@ export const TestDriveForm: React.FC<ITestDriveFormProps> = ({ cars, onSubmit })
             const connectionType = getFieldValue('connection-type');
             return (
               <Form.Item
-                label={connectionType === 'tel' ? 'Телефон' : 'Email'}
+                label={connectionType === 'email' ? 'Email' : 'Телефон'}
                 name="connection"
               >
                 <Input type={connectionType === 'tel' ? 'tel' : 'email'} />

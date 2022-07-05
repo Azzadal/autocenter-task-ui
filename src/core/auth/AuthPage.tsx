@@ -1,6 +1,6 @@
 import { Button, Card, Form, Input, Modal } from 'antd';
 import { useState } from 'react';
-import { AuthResponse, authservise } from './auth-servise';
+import { AuthResponse, authservice as authservice } from './auth-service';
 import { IAuthInfo } from './types';
 
 interface IAuthProps {
@@ -31,8 +31,8 @@ export const LoginPage: React.FC<ILoginProps> = ({ onSubmit }) => {
 
   const handleSubmit = async (info: IAuthInfo) => {
     choice === 'auth'
-      ? onSubmit(await authservise.authorization(info))
-      : await authservise.register(info);
+      ? onSubmit(await authservice.authorization(info))
+      : await authservice.register(info);
   };
 
   return (
