@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Card, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import { headersAuth } from '../auth/config';
 import { CarSharingForm, FormCarSharingType } from '../components/forms/carsharing-form';
@@ -20,15 +20,23 @@ export const CarSheringPage: React.FC = () => {
   const handleCarSharingRequest = (data: FormCarSharingType) => {
     console.log(data);
 
-    carsharingService.create(
-      {
-        car_id: data.car_id,
-        connection: data.connection,
-      },
-      {
-        headers: headersAuth,
-      }
-    );
+    carsharingService
+      .create(
+        {
+          car_id: data.car_id,
+          connection: data.connection,
+        },
+        {
+          headers: headersAuth,
+        }
+      )
+      .then(() => {
+        notification.open({
+          message: 'Внимание!',
+          description: 'Ваша заявка успешно принята',
+          duration: 4,
+        });
+      });
   };
 
   return (

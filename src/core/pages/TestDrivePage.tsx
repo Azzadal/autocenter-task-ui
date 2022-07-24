@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Card, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import { headersAuth } from '../auth/config';
 import { FormTestDriveType, TestDriveForm } from '../components/forms/test-drive-form';
@@ -18,16 +18,24 @@ export const TestDrivePage: React.FC = () => {
   }, []);
 
   const handleTestDriveRequest = (data: FormTestDriveType) => {
-    testDriveService.create(
-      {
-        car_id: data.car_id,
-        connection: data.connection,
-        testDriveDate: new Date(),
-      },
-      {
-        headers: headersAuth,
-      }
-    );
+    testDriveService
+      .create(
+        {
+          car_id: data.car_id,
+          connection: data.connection,
+          testDriveDate: new Date(),
+        },
+        {
+          headers: headersAuth,
+        }
+      )
+      .then(() => {
+        notification.open({
+          message: 'Внимание!',
+          description: 'Ваша заявка успешно принята',
+          duration: 4,
+        });
+      });
   };
 
   return (

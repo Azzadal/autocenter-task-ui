@@ -16,7 +16,6 @@ export const CarPage: React.FC = () => {
       .then((cars) => setCars(cars));
   }, []);
 
-  console.log('cars', cars);
   const test: ICarResponse = {
     id: 1,
     mark: { name: 'test_mark' },

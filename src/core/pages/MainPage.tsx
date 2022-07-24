@@ -18,6 +18,14 @@ export const MainPage: React.FC = () => {
           <Route path="test-drive" element={<TestDrivePage />} />
           <Route path="service" element={<ServicePage />} />
           <Route path="car-shering" element={<CarSheringPage />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: '1rem' }}>
+                <p>Здесь ничего нет!</p>
+              </main>
+            }
+          />
         </Route>
       </Routes>
     </>
