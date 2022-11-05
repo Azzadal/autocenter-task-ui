@@ -6,13 +6,13 @@ type RegisterResponse = { status: string };
 
 class AuthService {
   async register(request: IAuthInfo): Promise<RegisterResponse> {
-    const { data } = await axios.post('http://localhost:8080/register', request);
+    const { data } = await axios.post('https://localhost:8080/auth/register', request);
     return data;
   }
 
   async authorization(request: IAuthInfo): Promise<AuthResponse> {
     return axios
-      .post('http://localhost:8080/auth', request)
+      .post('https://localhost:8080/auth', request)
       .then((response: AxiosResponse<AuthResponse>) => {
         localStorage.setItem('accessToken', response.data.token);
         localStorage.setItem('userInfo', request.login);

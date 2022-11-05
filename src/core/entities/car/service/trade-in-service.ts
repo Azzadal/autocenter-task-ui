@@ -6,7 +6,7 @@ class TradeInService {
     request: ITradeInRequest,
     options?: AxiosRequestConfig
   ): Promise<void> {
-    return await axios.post(`http://localhost:8080/core/trade-in`, request, options);
+    return await axios.post(`https://localhost:8080/core/trade-in`, request, options);
   }
 }
 

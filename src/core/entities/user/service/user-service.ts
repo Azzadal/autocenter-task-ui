@@ -6,7 +6,7 @@ class UserService {
     login: string,
     options?: AxiosRequestConfig
   ): Promise<IUserInfo> {
-    const { data } = await axios.get(`http://localhost:8080/users/${login}`, options);
+    const { data } = await axios.get(`https://localhost:8080/users/${login}`, options);
     return data;
   }
 }

@@ -20,6 +20,7 @@ interface ILoginProps {
 export const LoginPage: React.FC<ILoginProps> = ({ onSubmit }) => {
   const [choice, setChoice] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>();
+
   const authHandle = () => {
     setChoice('auth');
     setShowModal(true);

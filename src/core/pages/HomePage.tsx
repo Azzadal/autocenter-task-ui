@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { authservice } from '../auth/auth-service';
 import { LoginPage } from '../auth/AuthPage';
 
 export const HomePage: React.FC = () => {
@@ -10,6 +12,7 @@ export const HomePage: React.FC = () => {
       {localStorageToken ? (
         <div className="home_page">
           <h1 style={{ fontFamily: 'inherit' }}>
+            
             Добро пожаловать на сайт автоцентра LUX auto
           </h1>
           <div className="promo">Акция месяца - скидка 20% на плановое ТО</div>
