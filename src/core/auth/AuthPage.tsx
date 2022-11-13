@@ -1,6 +1,7 @@
 import { Button, Card, Form, Input, Modal } from 'antd';
 import { useState } from 'react';
 import { AuthResponse, authservice as authservice } from './auth-service';
+import { useRegisterUser } from './hooks/queries';
 import { IAuthInfo } from './types';
 
 interface IAuthProps {
@@ -21,6 +22,8 @@ export const LoginPage: React.FC<ILoginProps> = ({ onSubmit }) => {
   const [choice, setChoice] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>();
 
+  const registerQuery = useRegisterUser();
+
   const authHandle = () => {
     setChoice('auth');
     setShowModal(true);
@@ -33,7 +36,7 @@ export const LoginPage: React.FC<ILoginProps> = ({ onSubmit }) => {
   const handleSubmit = async (info: IAuthInfo) => {
     choice === 'auth'
       ? onSubmit(await authservice.authorization(info))
-      : await authservice.register(info);
+      : registerQuery.mutate(info);
   };
 
   return (

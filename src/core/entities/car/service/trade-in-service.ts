@@ -1,4 +1,6 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import AxiosInstance from '../../../../axios-instace';
+import { apiEndpointUrl } from '../../../../config';
 import { ITradeInRequest } from '../model/trade-in';
 
 class TradeInService {
@@ -6,7 +8,7 @@ class TradeInService {
     request: ITradeInRequest,
     options?: AxiosRequestConfig
   ): Promise<void> {
-    return await axios.post(`https://localhost:8080/core/trade-in`, request, options);
+    return await AxiosInstance.post(`${apiEndpointUrl}/trade-in`, request, options);
   }
 }
 

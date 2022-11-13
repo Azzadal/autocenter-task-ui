@@ -1,23 +1,25 @@
-import axios, { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import AxiosInstance from '../../../../axios-instace';
+import { apiEndpointUrl } from '../../../../config';
 import { ICarRequest, ICarResponse } from '../model/car';
 
 class CarService {
   public async getAll(options?: AxiosRequestConfig): Promise<ICarResponse[]> {
-    const { data } = await axios.get(`https://localhost:8080/core/car`, options);
+    const { data } = await AxiosInstance.get(`${apiEndpointUrl}/core/car`, options);
     return data;
   }
 
   public async getById(id: number): Promise<ICarResponse> {
-    const { data } = await axios.get(`https://localhost:8080/core/car/${id}`);
+    const { data } = await AxiosInstance.get(`${apiEndpointUrl}/core/car/${id}`);
     return data;
   }
 
   public async create(request: ICarRequest): Promise<ICarResponse> {
-    return await axios.post(`https://localhost:8080/core/car`, request);
+    return await AxiosInstance.post(`${apiEndpointUrl}/core/car`, request);
   }
 
   public async delete(id: number) {
-    await axios.delete(`https://localhost:8080/core/car/${id}`);
+    await AxiosInstance.delete(`${apiEndpointUrl}/core/car/${id}`);
   }
 }
 

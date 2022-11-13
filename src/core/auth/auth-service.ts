@@ -1,4 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
+import AxiosInstance from '../../axios-instace';
+import { apiEndpointUrl } from '../../config';
 import { IAuthInfo } from './types';
 
 export type AuthResponse = { token: string };
@@ -6,18 +8,21 @@ type RegisterResponse = { status: string };
 
 class AuthService {
   async register(request: IAuthInfo): Promise<RegisterResponse> {
-    const { data } = await axios.post('https://localhost:8080/auth/register', request);
+    const { data } = await AxiosInstance.post(`${apiEndpointUrl}/auth/register`, request);
     return data;
   }
 
   async authorization(request: IAuthInfo): Promise<AuthResponse> {
-    return axios
-      .post('https://localhost:8080/auth', request)
-      .then((response: AxiosResponse<AuthResponse>) => {
+    console.log('req', `${apiEndpointUrl}/auth`);
+    // console.log('req', window);
+
+    return AxiosInstance.post(`${apiEndpointUrl}/auth`, request).then(
+      (response: AxiosResponse<AuthResponse>) => {
         localStorage.setItem('accessToken', response.data.token);
         localStorage.setItem('userInfo', request.login);
         return response.data;
-      });
+      }
+    );
   }
 }
 

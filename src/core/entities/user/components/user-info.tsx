@@ -1,6 +1,5 @@
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
-import { headersAuth } from '../../../auth/config';
 import { userService } from '../service/user-service';
 import { IUserInfo } from '../../user/model/user';
 import { useNavigate } from 'react-router-dom';
@@ -10,11 +9,7 @@ export const UserInfoTopBar: React.FC = () => {
   const [userInfo, setUserInfo] = useState<IUserInfo>();
   let navigate = useNavigate();
   useEffect(() => {
-    userService
-      .getUserByLogin(login, {
-        headers: headersAuth,
-      })
-      .then((userInfo) => setUserInfo(userInfo));
+    userService.getUserByLogin(login).then((userInfo) => setUserInfo(userInfo));
   }, []);
 
   const handleExit = () => {

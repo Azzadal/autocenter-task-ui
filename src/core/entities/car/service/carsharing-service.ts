@@ -1,4 +1,6 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import AxiosInstance from '../../../../axios-instace';
+import { apiEndpointUrl } from '../../../../config';
 import { ICarSharingRequest } from '../model/test-drive';
 
 class CarSharingService {
@@ -6,7 +8,11 @@ class CarSharingService {
     request: ICarSharingRequest,
     options?: AxiosRequestConfig
   ): Promise<void> {
-    return await axios.post(`http://localhost:8080/core/car-sharing`, request, options);
+    return await AxiosInstance.post(
+      `${apiEndpointUrl}/core/car-sharing`,
+      request,
+      options
+    );
   }
 }
 

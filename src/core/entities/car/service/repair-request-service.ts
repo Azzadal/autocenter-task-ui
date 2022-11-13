@@ -1,4 +1,6 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import AxiosInstance from '../../../../axios-instace';
+import { apiEndpointUrl } from '../../../../config';
 import { IRepairRequest } from '../model/repair-request';
 
 class RepairRequestService {
@@ -6,8 +8,8 @@ class RepairRequestService {
     request: IRepairRequest,
     options?: AxiosRequestConfig
   ): Promise<void> {
-    return await axios.post(
-      `http://localhost:8080/core/repair-service`,
+    return await AxiosInstance.post(
+      `${apiEndpointUrl}/core/repair-service`,
       request,
       options
     );

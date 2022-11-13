@@ -1,19 +1,13 @@
 import { Card, notification } from 'antd';
-import { headersAuth } from '../auth/config';
 import { FormTradeInType, TradeInForm } from '../components/forms/trade-in-form';
 import tradeInService from '../entities/car/service/trade-in-service';
 
 export const TradeInPage: React.FC = () => {
   const handleTradeInRequest = (data: FormTradeInType) => {
     tradeInService
-      .create(
-        {
-          connection: data.connection,
-        },
-        {
-          headers: headersAuth,
-        }
-      )
+      .create({
+        connection: data.connection,
+      })
       .then(() => {
         notification.open({
           message: 'Внимание!',

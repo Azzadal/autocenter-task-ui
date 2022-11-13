@@ -1,4 +1,6 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import AxiosInstance from '../../../../axios-instace';
+import { apiEndpointUrl } from '../../../../config';
 import { IUserInfo } from '../model/user';
 
 class UserService {
@@ -6,7 +8,7 @@ class UserService {
     login: string,
     options?: AxiosRequestConfig
   ): Promise<IUserInfo> {
-    const { data } = await axios.get(`https://localhost:8080/users/${login}`, options);
+    const { data } = await AxiosInstance.get(`${apiEndpointUrl}/${login}`, options);
     return data;
   }
 }

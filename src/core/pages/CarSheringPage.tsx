@@ -1,6 +1,5 @@
 import { Card, notification } from 'antd';
 import { useEffect, useState } from 'react';
-import { headersAuth } from '../auth/config';
 import { CarSharingForm, FormCarSharingType } from '../components/forms/carsharing-form';
 import { ICarResponse } from '../entities/car/model/car';
 import carService from '../entities/car/service/car-service';
@@ -10,26 +9,17 @@ export const CarSheringPage: React.FC = () => {
   const [cars, setCars] = useState<ICarResponse[]>([]);
 
   useEffect(() => {
-    const carQuery = carService
-      .getAll({
-        headers: headersAuth,
-      })
-      .then((cars) => setCars(cars));
+    const carQuery = carService.getAll().then((cars) => setCars(cars));
   }, []);
 
   const handleCarSharingRequest = (data: FormCarSharingType) => {
     console.log(data);
 
     carsharingService
-      .create(
-        {
-          car_id: data.car_id,
-          connection: data.connection,
-        },
-        {
-          headers: headersAuth,
-        }
-      )
+      .create({
+        car_id: data.car_id,
+        connection: data.connection,
+      })
       .then(() => {
         notification.open({
           message: 'Внимание!',

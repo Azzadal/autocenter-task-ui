@@ -1,6 +1,5 @@
 import { Card, notification } from 'antd';
 import { useEffect, useState } from 'react';
-import { headersAuth } from '../auth/config';
 import { FormTestDriveType, TestDriveForm } from '../components/forms/test-drive-form';
 import { ICarResponse } from '../entities/car/model/car';
 import carService from '../entities/car/service/car-service';
@@ -10,25 +9,16 @@ export const TestDrivePage: React.FC = () => {
   const [cars, setCars] = useState<ICarResponse[]>([]);
 
   useEffect(() => {
-    const carQuery = carService
-      .getAll({
-        headers: headersAuth,
-      })
-      .then((cars) => setCars(cars));
+    const carQuery = carService.getAll().then((cars) => setCars(cars));
   }, []);
 
   const handleTestDriveRequest = (data: FormTestDriveType) => {
     testDriveService
-      .create(
-        {
-          car_id: data.car_id,
-          connection: data.connection,
-          testDriveDate: new Date(),
-        },
-        {
-          headers: headersAuth,
-        }
-      )
+      .create({
+        car_id: data.car_id,
+        connection: data.connection,
+        testDriveDate: new Date(),
+      })
       .then(() => {
         notification.open({
           message: 'Внимание!',
