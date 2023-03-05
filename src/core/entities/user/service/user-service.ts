@@ -8,7 +8,7 @@ class UserService {
     login: string,
     options?: AxiosRequestConfig
   ): Promise<IUserInfo> {
-    const { data } = await AxiosInstance.get(`${apiEndpointUrl}/${login}`, options);
+    const { data } = await AxiosInstance.get(`${apiEndpointUrl}/users/${login}`, options);
     return data;
   }
 }

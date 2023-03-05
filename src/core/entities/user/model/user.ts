@@ -5,6 +5,7 @@ enum Role {
 
 export interface IUserInfo {
   id: number;
+  login: string;
   FIO: string;
   birthday: Date;
   email: string;

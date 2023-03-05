@@ -1,0 +1,26 @@
+{
+  // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+  // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+  // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Prolog Files",
+      "type": "prolog",
+      "request": "launch",
+      "runtimeExecutable": "C:\\Program Files (x86)\\Visual Prolog 7.5 PE\\bin",
+      "runtimeArgs": [],
+      "env": {},
+      "program": "${file}",
+      "cwd": "${fileDirname}",
+      "startupQuery": "start",
+      "stopOnEntry": true,
+      "traceCmds": {
+        "continue": ["leap", "l"],
+        "stepover": ["skip", "s"],
+        "stepinto": ["creep", "c"],
+        "stepout": ["up", "u"]
+      }
+    }
+  ]
+}

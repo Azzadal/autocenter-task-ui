@@ -1,9 +1,13 @@
 import { AxiosResponse } from 'axios';
 import AxiosInstance from '../../axios-instace';
 import { apiEndpointUrl } from '../../config';
+import { IUserInfo } from '../entities/user/model/user';
 import { IAuthInfo } from './types';
 
-export type AuthResponse = { token: string };
+export type AuthResponse = {
+  token: string;
+  userInfo: IUserInfo;
+};
 type RegisterResponse = { status: string };
 
 class AuthService {
@@ -19,7 +23,7 @@ class AuthService {
     return AxiosInstance.post(`${apiEndpointUrl}/auth`, request).then(
       (response: AxiosResponse<AuthResponse>) => {
         localStorage.setItem('accessToken', response.data.token);
-        localStorage.setItem('userInfo', request.login);
+        localStorage.setItem('userInfo', JSON.stringify({ login: request.login }));
         return response.data;
       }
     );
