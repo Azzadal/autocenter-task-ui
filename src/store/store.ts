@@ -1,6 +1,10 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { Action, AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { authInfoReducer, userInfoReduces } from '../core/auth/reducer';
 import { useDispatch } from 'react-redux';
+import { history } from './history';
+
+// const rootReducer = createRootReducer(history);
 
 const rootReducer = combineReducers({
   auth: authInfoReducer,
@@ -11,5 +15,15 @@ export const store = configureStore({
   reducer: rootReducer,
 });
 
+type DispatchFunc = () => AppDispatch;
+
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
-export const useAppDispatch: () => AppDispatch = useDispatch;
+export type AppThunkDispatch = ThunkDispatch<RootState, undefined, AnyAction>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  undefined,
+  Action<string>
+>;
+export const useAppDispatch: DispatchFunc = useDispatch;

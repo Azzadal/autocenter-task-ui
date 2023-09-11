@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import AxiosInstance from '../../axios-instace';
 import { apiEndpointUrl } from '../../config';
 import { IUserInfo } from '../entities/user/model/user';
-import { IAuthInfo } from './types';
+import { IAuthInfo, IRegisterRequest } from './types';
 
 export type AuthResponse = {
   token: string;
@@ -11,7 +11,7 @@ export type AuthResponse = {
 type RegisterResponse = { status: string };
 
 class AuthService {
-  async register(request: IAuthInfo): Promise<RegisterResponse> {
+  async register(request: IRegisterRequest): Promise<RegisterResponse> {
     const { data } = await AxiosInstance.post(`${apiEndpointUrl}/auth/register`, request);
     return data;
   }

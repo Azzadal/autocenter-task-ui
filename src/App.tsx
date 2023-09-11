@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import { QueryClientProvider } from 'react-query';
-import { AuthResponse } from './core/auth/auth-service';
-import { MainPage } from './core/pages/MainPage';
+import React from 'react';
+import { MainRouter } from './core/pages/MainRouter';
 
 export const AppContext = React.createContext({ token: 'token' });
 
 function App() {
-  return <MainPage />;
+  return <MainRouter />;
 }
 
 export default App;

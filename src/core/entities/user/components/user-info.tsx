@@ -20,7 +20,6 @@ export const UserInfoTopBar: React.FC = () => {
 
   useEffect(() => {
     console.log('info', st);
-
     setUserInfo(st.user);
   }, [st]);
 

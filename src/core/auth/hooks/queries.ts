@@ -1,13 +1,8 @@
 import { notification } from 'antd';
 import { useMutation } from 'react-query';
 import { authservice } from '../auth-service';
+import { IUseMutateQueryOptions } from '../../types';
 
-export function useRegisterUser() {
-  return useMutation(authservice.register, {
-    onError: (_, variables) => {
-      notification.error({
-        message: `Пользователь с именем ${variables.login} уже существует`,
-      });
-    },
-  });
+export function useRegisterUser(options?: IUseMutateQueryOptions) {
+  return useMutation(authservice.register, options);
 }

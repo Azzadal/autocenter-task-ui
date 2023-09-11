@@ -2,15 +2,16 @@ import { Button, Card, Form, Input, Modal, notification } from 'antd';
 import { useState } from 'react';
 import { AuthResponse, authservice as authservice } from './auth-service';
 import { useRegisterUser } from './hooks/queries';
-import { IAuthInfo, IRegisterInfo } from './types';
+import { IAuthInfo, IRegisterInfo, IRegisterRequest } from './types';
 import { useDispatch } from 'react-redux';
 import { authstate } from './reducer';
-import { setAccessToken, setUserInfo } from './actions';
+import { loginThunk, setAccessToken, setUserInfo } from './actions';
 import { userService } from '../entities/user/service/user-service';
+import { AppThunkDispatch } from '../../store/store';
 
 interface IAuthProps {
   onCancel: () => void;
-  onSubmit: (info: IAuthInfo) => void;
+  onSubmit: (info: IRegisterInfo) => void;
 }
 
 interface IRegisterProps {
@@ -24,11 +25,19 @@ interface ILoginProps {
 
 export const LoginPage: React.FC<ILoginProps> = ({ onSubmit }) => {
   const [choice, setChoice] = useState<string>('');
-  const [showModal, setShowModal] = useState<boolean>();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  const dispatch = useDispatch();
+  const dispatch: AppThunkDispatch = useDispatch();
 
-  const registerQuery = useRegisterUser();
+  const registerQuery = useRegisterUser({
+    onSuccess: (data) => {},
+    onError: (err) => {
+      notification.error({
+        // message: `Пользователь с именем ${variables.login} уже существует`,
+        message: err.message,
+      });
+    },
+  });
 
   const authHandle = () => {
     setChoice('auth');
@@ -39,23 +48,27 @@ export const LoginPage: React.FC<ILoginProps> = ({ onSubmit }) => {
     setShowModal(true);
   };
 
-  const handleSubmit = async (info: IAuthInfo) => {
+  const handleSubmit = async (info: IRegisterInfo) => {
     if (choice == 'auth') {
-      const user = await userService.getUserByLogin(info.login);
-      console.log('user', user);
+      dispatch(loginThunk(info.login, info.password));
+    }
 
-      const resp = await authservice.authorization(info);
-      if (user) {
-        dispatch(setUserInfo(user));
-      }
-      dispatch(setAccessToken(resp.token));
-      const fio = user.FIO ?? '';
-      notification.success({ message: `Привет ${fio}` });
+    let infreg = {} as IRegisterRequest;
+    if (choice !== 'auth') {
+      infreg = {
+        ...info,
+        fio: {
+          firstName: info.firstName,
+          lastName: info.lastName,
+          surName: info.surName,
+        },
+      };
+      console.log('infreg', info);
     }
 
     choice === 'auth'
       ? onSubmit?.(await authservice.authorization(info))
-      : registerQuery.mutate(info);
+      : registerQuery.mutate(infreg);
   };
 
   return (
@@ -78,13 +91,13 @@ export const LoginPage: React.FC<ILoginProps> = ({ onSubmit }) => {
 const AuthPage: React.FC<IAuthProps> = ({ onSubmit, onCancel }) => {
   const dispatch = useDispatch();
 
-  const handleFinish = (info: IAuthInfo) => {
+  const handleFinish = (info: IRegisterInfo) => {
     onSubmit(info);
     onCancel();
   };
   return (
     <Card>
-      <Form<IAuthInfo> onFinish={handleFinish}>
+      <Form<IRegisterInfo> onFinish={handleFinish}>
         <Form.Item
           name={'login'}
           style={{
@@ -132,6 +145,7 @@ const RegisterPage: React.FC<IRegisterProps> = ({ onSubmit, onCancel }) => {
     onSubmit(info);
     onCancel();
   };
+
   return (
     <Card>
       <Form<IRegisterInfo> onFinish={handleFinish}>
@@ -146,8 +160,16 @@ const RegisterPage: React.FC<IRegisterProps> = ({ onSubmit, onCancel }) => {
         <Form.Item name={'password'}>
           <Input placeholder="Пароль" type={'password'} />
         </Form.Item>
-        <Form.Item name={'fio'}>
-          <Input placeholder="ФИО" type={'text'} />
+        <Form.Item>
+          <Form.Item name="firstName">
+            <Input placeholder="Ф" type={'text'} />
+          </Form.Item>
+          <Form.Item name="lastName">
+            <Input placeholder="И" type={'text'} />
+          </Form.Item>
+          <Form.Item name="surName">
+            <Input placeholder="О" type={'text'} />
+          </Form.Item>
         </Form.Item>
         <Form.Item name={'birthDay'}>
           <Input placeholder="День рождения" type={'date'} />

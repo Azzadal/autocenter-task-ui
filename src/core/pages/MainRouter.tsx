@@ -7,7 +7,7 @@ import { ServicePage } from './ServicePage';
 import { TestDrivePage } from './TestDrivePage';
 import { TradeInPage } from './TradeInPage';
 
-export const MainPage: React.FC = () => {
+export const MainRouter: React.FC = () => {
   return (
     <>
       <Routes>
