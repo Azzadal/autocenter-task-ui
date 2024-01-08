@@ -1,11 +1,17 @@
 import { Card, notification } from 'antd';
 import { FormTradeInType, TradeInForm } from '../components/forms/trade-in-form';
 import tradeInService from '../entities/car/service/trade-in-service';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../auth/selectors';
 
 export const TradeInPage: React.FC = () => {
+  const user = useSelector(userSelector);
+  console.log('user', user);
+
   const handleTradeInRequest = (data: FormTradeInType) => {
     tradeInService
       .create({
+        userId: user?.id,
         connection: data.connection,
       })
       .then(() => {

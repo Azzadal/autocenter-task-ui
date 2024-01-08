@@ -2,9 +2,6 @@ import { Action, AnyAction, combineReducers, configureStore } from '@reduxjs/too
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { authInfoReducer, userInfoReduces } from '../core/auth/reducer';
 import { useDispatch } from 'react-redux';
-import { history } from './history';
-
-// const rootReducer = createRootReducer(history);
 
 const rootReducer = combineReducers({
   auth: authInfoReducer,

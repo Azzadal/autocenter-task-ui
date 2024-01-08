@@ -23,7 +23,7 @@ class AuthService {
     return AxiosInstance.post(`${apiEndpointUrl}/auth`, request).then(
       (response: AxiosResponse<AuthResponse>) => {
         localStorage.setItem('accessToken', response.data.token);
-        localStorage.setItem('userInfo', JSON.stringify({ login: request.login }));
+        localStorage.setItem('userInfo', JSON.stringify(response.data.userInfo));
         return response.data;
       }
     );

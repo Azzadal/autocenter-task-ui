@@ -8,7 +8,7 @@ class TradeInService {
     request: ITradeInRequest,
     options?: AxiosRequestConfig
   ): Promise<void> {
-    return await AxiosInstance.post(`${apiEndpointUrl}/trade-in`, request, options);
+    return await AxiosInstance.post(`${apiEndpointUrl}/core/trade-in`, request, options);
   }
 }
 
